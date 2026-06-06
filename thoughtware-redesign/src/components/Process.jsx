@@ -1,4 +1,5 @@
 import { FiSearch, FiClipboard, FiCode, FiPackage } from 'react-icons/fi'
+import FadeIn from './FadeIn'
 
 const steps = [
   {
@@ -59,14 +60,14 @@ export default function Process() {
       ))}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <FadeIn className="text-center mb-16">
           <p className="text-red-500 font-bold text-xs tracking-[0.25em] uppercase mb-3">
             Our Process
           </p>
           <h2 className="text-4xl font-extrabold text-white">
             A Proven Process for Excellence
           </h2>
-        </div>
+        </FadeIn>
 
         <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Connecting line (desktop) */}
@@ -75,8 +76,9 @@ export default function Process() {
             style={{ background: 'linear-gradient(to right, transparent, rgba(220,38,38,0.4), transparent)' }}
           />
 
-          {steps.map((step) => (
-            <div key={step.number} className="flex flex-col items-center text-center">
+          {steps.map((step, i) => (
+            <FadeIn key={step.number} delay={i * 0.12}>
+            <div className="flex flex-col items-center text-center">
               <div
                 className="relative w-20 h-20 rounded-full flex flex-col items-center justify-center mb-6 z-10"
                 style={{ background: 'linear-gradient(145deg, #dc2626, #991b1b)', boxShadow: '0 0 0 6px rgba(220,38,38,0.15)' }}
@@ -87,6 +89,7 @@ export default function Process() {
               <h3 className="text-white font-bold text-lg mb-3">{step.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed max-w-[200px]">{step.description}</p>
             </div>
+            </FadeIn>
           ))}
         </div>
       </div>

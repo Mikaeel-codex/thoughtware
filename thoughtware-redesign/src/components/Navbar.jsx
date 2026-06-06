@@ -1,19 +1,26 @@
 import { useState, useEffect } from 'react'
 import { FiArrowRight, FiMenu, FiX } from 'react-icons/fi'
+import { useLocation } from 'react-router-dom'
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Our Process', href: '#process' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home',        href: '#home' },
+  { label: 'About Us',   href: '#about' },
+  { label: 'Services',   href: '#services' },
+  { label: 'Our Process',href: '#process' },
+  { label: 'Projects',   href: '#projects' },
+  { label: 'Contact',    href: '#contact' },
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [active, setActive] = useState('Home')
+  const [scrolled, setScrolled]   = useState(false)
+  const [menuOpen, setMenuOpen]   = useState(false)
+  const [active,   setActive]     = useState('Home')
+  const location = useLocation()
+  const isHome = location.pathname === '/'
+
+  // Prefix hash links with '/' when not on the home page so the browser
+  // navigates home first and then scrolls to the right section.
+  const href = (hash) => isHome ? hash : `/${hash}`
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30)
@@ -31,7 +38,7 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2.5">
+        <a href={href('#home')} className="flex items-center gap-2.5">
           <div
             className="w-9 h-9 bg-red-600 flex items-center justify-center text-white font-bold text-base"
             style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
@@ -45,7 +52,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <li key={link.label}>
               <a
-                href={link.href}
+                href={href(link.href)}
                 onClick={() => setActive(link.label)}
                 className="text-sm font-medium transition-colors duration-200 hover:text-white"
                 style={{
@@ -61,7 +68,7 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="#contact"
+          href={href('#contact')}
           className="hidden md:flex items-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:bg-red-700"
           style={{ background: '#dc2626' }}
         >
@@ -83,7 +90,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <li key={link.label}>
                 <a
-                  href={link.href}
+                  href={href(link.href)}
                   className="text-gray-300 hover:text-white text-sm font-medium block py-1"
                   onClick={() => { setActive(link.label); setMenuOpen(false) }}
                 >
@@ -93,7 +100,7 @@ export default function Navbar() {
             ))}
             <li>
               <a
-                href="#contact"
+                href={href('#contact')}
                 className="inline-flex items-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-full mt-2 bg-red-600 hover:bg-red-700"
                 onClick={() => setMenuOpen(false)}
               >

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import FadeIn from './FadeIn'
 
 const testimonials = [
   {
@@ -53,17 +54,17 @@ export default function Testimonials() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Left label */}
-          <div className="lg:w-64 flex-shrink-0">
+          <FadeIn className="lg:w-64 flex-shrink-0">
             <p className="text-red-500 font-bold text-xs tracking-[0.25em] uppercase mb-3">
               Testimonials
             </p>
             <h2 className="text-3xl font-extrabold text-white leading-tight">
               What Our Clients Say
             </h2>
-          </div>
+          </FadeIn>
 
           {/* Quote card */}
-          <div className="flex-1 relative">
+          <FadeIn delay={0.15} className="flex-1 relative">
             {/* Large quote mark */}
             <div
               className="absolute -top-4 left-0 font-serif leading-none select-none pointer-events-none"
@@ -89,7 +90,7 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
         </div>
 
         {/* Controls */}

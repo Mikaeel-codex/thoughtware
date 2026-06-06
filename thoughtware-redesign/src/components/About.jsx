@@ -1,4 +1,6 @@
 import { FiCheckCircle, FiArrowRight, FiPlay } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
+import FadeIn from './FadeIn'
 
 const points = [
   'Client-Centric Approach',
@@ -11,7 +13,7 @@ export default function About() {
     <section id="about" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left — video thumbnail */}
-        <div className="relative">
+        <FadeIn><div className="relative">
           {/* Dot grid decoration */}
           <div
             className="absolute -left-6 -top-6 w-32 h-32 pointer-events-none"
@@ -61,10 +63,10 @@ export default function About() {
               opacity: 0.25,
             }}
           />
-        </div>
+        </div></FadeIn>
 
         {/* Right — text */}
-        <div>
+        <FadeIn delay={0.15}><div>
           <p className="text-red-600 font-bold text-xs tracking-[0.25em] uppercase mb-4">
             Who We Are
           </p>
@@ -83,14 +85,14 @@ export default function About() {
               </li>
             ))}
           </ul>
-          <a
-            href="#contact"
+          <Link
+            to="/about"
             className="inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-200 hover:bg-red-700"
             style={{ background: '#dc2626' }}
           >
             Learn More About Us <FiArrowRight />
-          </a>
-        </div>
+          </Link>
+        </div></FadeIn>
       </div>
     </section>
   )

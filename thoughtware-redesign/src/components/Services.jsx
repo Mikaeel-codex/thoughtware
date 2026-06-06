@@ -1,78 +1,124 @@
-import { FiCode, FiCloud, FiBriefcase, FiBarChart2, FiSmartphone, FiSettings, FiArrowRight } from 'react-icons/fi'
+import { useState } from 'react'
+import { FiCode, FiSmartphone, FiLayers, FiArrowRight } from 'react-icons/fi'
+import FadeIn from './FadeIn'
 
 const services = [
   {
-    icon: <FiCode size={28} />,
-    title: 'Software Development',
+    Icon: FiCode,
+    title: 'Software Applications',
     description: 'Custom software solutions built for performance & scalability.',
+    gradient: 'linear-gradient(-45deg, #dc2626 0%, #7f1d1d 100%)',
+    hoverText: 'At Thoughtware we understand that your business is unique and therefore we create software that meets your exact business needs and that is adaptable to your ever-changing requirements. Our experienced team has the knowledge and expertise to solve complex integration challenges and when we deliver we understand the importance of flexible, scalable applications, which allow our clients to modify as and when they want.',
   },
   {
-    icon: <FiCloud size={28} />,
-    title: 'Cloud Solutions',
-    description: 'Scalable, secure and cost-effective cloud solutions.',
+    Icon: FiSmartphone,
+    title: 'Mobile Applications',
+    description: 'Scalable, secure and cost-effective mobile solutions for any platform.',
+    gradient: 'linear-gradient(-45deg, #991b1b 0%, #0a0a1a 100%)',
+    hoverText: 'Mobile applications and mobile web sites are quickly becoming larger portions of every company’s digital media plan. With more and more smart phones purchased every day, making sure you have a quality presence on a mobile device is not only incredibly important but becoming essential to a successful marketing campaign. Thoughtware can develop a wide variety of Mobile web sites as well as custom Mobile Applications for any device or platform. '
   },
   {
-    icon: <FiBriefcase size={28} />,
-    title: 'Business Analysis',
-    description: 'Data-driven insights to make smarter business decisions.',
-  },
-  {
-    icon: <FiBarChart2 size={28} />,
-    title: 'IT Consulting',
-    description: 'Expert guidance to optimize processes and accelerate business growth.',
-  },
-  {
-    icon: <FiSmartphone size={28} />,
-    title: 'Mobile Solutions',
-    description: 'Cross platform mobile apps that engage and perform.',
-  },
-  {
-    icon: <FiSettings size={28} />,
-    title: 'Enterprise Integration',
-    description: 'Seamless integration of systems and processes.',
+    Icon: FiLayers,
+    title: 'Applications & Middleware Services',
+    description: 'Seamless middleware integration connecting your systems and data flows.',
+    gradient: 'linear-gradient(-45deg, #0a0a1a 0%, #dc2626 100%)',
+    hoverText: 'A third-party IT services provider can manage and implement enterprise solutions, allowing internal IT organizations to focus on high-priority and strategic initiatives. Thoughtware’s Enterprise Applications and Middleware Services provide extensive experience and expertise across Oracle and Microsoft products. We deliver custom enterprise solutions that enhance business. '
   },
 ]
 
+const ease = 'cubic-bezier(0.23, 1, 0.32, 1)'
+
 export default function Services() {
+  const [hovered, setHovered] = useState(null)
+
   return (
     <section id="services" className="py-24" style={{ background: '#f8f9fc' }}>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <FadeIn className="text-center mb-14">
           <p className="text-red-600 font-bold text-xs tracking-[0.25em] uppercase mb-3">
             Our Services
           </p>
           <h2 className="text-4xl font-extrabold text-gray-900">
             Solutions That Drive Success
           </h2>
-        </div>
+        </FadeIn>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="bg-white rounded-2xl p-8 group hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-red-100"
-            >
-              <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-red-600"
-                style={{ background: '#fff1f1', color: '#dc2626' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#ffffff' }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#dc2626' }}
-              >
-                <div className="group-hover:text-white" style={{ color: 'inherit' }}>
-                  {service.icon}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {services.map(({ Icon, title, description, gradient, hoverText }, i) => {
+            const on = hovered === i
+            return (
+              <FadeIn key={title} delay={i * 0.1}>
+                <div
+                  className="relative rounded-2xl overflow-hidden cursor-pointer"
+                  style={{
+                    height: 240,
+                    background: gradient,
+                    transition: `box-shadow 0.6s ${ease}`,
+                    boxShadow: on
+                      ? '0 10px 30px rgba(220,38,38,0.35)'
+                      : '0 4px 16px rgba(0,0,0,0.1)',
+                  }}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  {/* Back face — white, reveals on hover */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: hoverText ? '24px' : 0,
+                      background: '#ffffff',
+                      transition: `transform 0.6s ${ease}, opacity 0.4s ${ease}`,
+                      transform: on ? 'scale(1) rotate(0deg)' : 'scale(0) rotate(-45deg)',
+                      opacity: on ? 1 : 0,
+                    }}
+                  >
+                    {hoverText ? (
+                      <p style={{ margin: 0, fontSize: 13, color: '#4b5563', lineHeight: 1.7 }}>
+                        {hoverText}
+                      </p>
+                    ) : (
+                      <Icon size={56} color="#dc2626" />
+                    )}
+                  </div>
+
+                  {/* Front face — red gradient, visible by default */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      width: '100%',
+                      height: '100%',
+                      padding: '28px',
+                      boxSizing: 'border-box',
+                      background: gradient,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      opacity: on ? 0 : 1,
+                      transform: on
+                        ? 'translate(-50%, -50%) rotate(-45deg)'
+                        : 'translate(-50%, -50%) rotate(0deg)',
+                      transition: `all 0.6s ${ease}`,
+                    }}
+                  >
+                    <Icon size={36} color="rgba(255,255,255,0.85)" style={{ marginBottom: 14 }} />
+                    <p style={{ margin: 0, fontSize: 17, color: '#ffffff', fontWeight: 700, lineHeight: 1.3 }}>{title}</p>
+                    <p style={{ marginTop: 10, fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{description}</p>
+                    <p style={{ marginTop: 18, fontSize: 12, color: 'rgba(255,255,255,0.5)', fontStyle: 'italic' }}>
+                      <span className="hidden md:inline">Hover</span>
+                      <span className="md:hidden">Tap</span>
+                      {' '}to learn more
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">{service.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-5">{service.description}</p>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors duration-200 hover:gap-2.5"
-                style={{ color: '#dc2626' }}
-              >
-                Learn More <FiArrowRight size={14} />
-              </a>
-            </div>
-          ))}
+              </FadeIn>
+            )
+          })}
         </div>
       </div>
     </section>

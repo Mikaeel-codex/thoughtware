@@ -1,4 +1,5 @@
 import { FiArrowRight } from 'react-icons/fi'
+import FadeIn from './FadeIn'
 
 const hexClip = 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
 
@@ -34,7 +35,7 @@ export default function CTA() {
         />
       ))}
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-8">
+      <FadeIn className="relative z-10 max-w-4xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-8">
         <div>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-3 leading-tight">
             Ready To Bring Your<br />Idea To Life?
@@ -51,7 +52,7 @@ export default function CTA() {
         >
           Schedule a Consultation <FiArrowRight />
         </a>
-      </div>
+      </FadeIn>
     </section>
   )
 }

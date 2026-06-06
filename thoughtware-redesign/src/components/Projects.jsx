@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FiChevronLeft, FiChevronRight, FiArrowRight } from 'react-icons/fi'
+import FadeIn from './FadeIn'
 
 const projects = [
   {
@@ -149,12 +150,12 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
+        <FadeIn className="text-center mb-14">
           <p className="text-red-600 font-bold text-xs tracking-[0.25em] uppercase mb-3">
             Featured Projects
           </p>
           <h2 className="text-4xl font-extrabold text-gray-900">Some Of Our Work</h2>
-        </div>
+        </FadeIn>
 
         <div className="relative">
           {/* Prev arrow */}
