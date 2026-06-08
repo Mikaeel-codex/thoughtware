@@ -1,0 +1,40 @@
+.curved-loop-jacket {
+  width: 100%;
+  overflow: hidden;
+  /* Fade logos at the edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 9%,
+    black 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 9%,
+    black 91%,
+    transparent 100%
+  );
+}
+
+.curved-loop-jacket:active {
+  cursor: grabbing !important;
+}
+
+.curved-loop-svg {
+  width: 100%;
+  display: block;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.cl-logo {
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+
+.cl-logo:hover {
+  opacity: 1;
+}

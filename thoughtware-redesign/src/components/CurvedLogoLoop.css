@@ -1,0 +1,45 @@
+.cll-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #05050f 0%, #0d0d1e 100%);
+  cursor: grab;
+  /* Fade logos out at the left and right edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 9%,
+    black 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 9%,
+    black 91%,
+    transparent 100%
+  );
+}
+
+.cll-wrapper:active {
+  cursor: grabbing;
+}
+
+.cll-svg {
+  width: 100%;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  /* Render all logos white so they look consistent on dark bg.
+     Remove this line if your logos already have the right colour. */
+  filter: brightness(0) invert(1);
+}
+
+.cll-logo {
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+
+.cll-logo:hover {
+  opacity: 1;
+}

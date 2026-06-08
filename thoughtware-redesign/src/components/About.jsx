@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { FiCheckCircle, FiArrowRight, FiPlay } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import FadeIn from './FadeIn'
+
+const VIDEO_SRC = '/videos/about.mp4'
 
 const points = [
   'Client-Centric Approach',
@@ -9,10 +12,12 @@ const points = [
 ]
 
 export default function About() {
+  const [playing, setPlaying] = useState(false)
+
   return (
     <section id="about" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Left — video thumbnail */}
+        {/* Left — video */}
         <FadeIn><div className="relative">
           {/* Dot grid decoration */}
           <div
@@ -24,34 +29,50 @@ export default function About() {
             }}
           />
 
-          <div
-            className="relative rounded-2xl overflow-hidden aspect-video flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #0f0f1a 0%, #1a0505 100%)' }}
-          >
-            {/* Simulated meeting room silhouette */}
-            <div className="absolute inset-0 flex items-end justify-center pb-8">
-              <div className="flex gap-4 items-end opacity-30">
-                {[60, 75, 55, 70].map((h, i) => (
-                  <div
-                    key={i}
-                    className="rounded-full bg-gray-400"
-                    style={{ width: 36, height: h, borderRadius: '50% 50% 0 0' }}
-                  />
-                ))}
+          <div className="relative rounded-2xl overflow-hidden aspect-video">
+            {playing ? (
+              /* ── Actual video player ── */
+              <video
+                src={VIDEO_SRC}
+                autoPlay
+                controls
+                className="w-full h-full object-cover"
+                style={{ background: '#000' }}
+              />
+            ) : (
+              /* ── Thumbnail + play button ── */
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{ background: 'linear-gradient(135deg, #0f0f1a 0%, #1a0505 100%)' }}
+              >
+                {/* Silhouette */}
+                <div className="absolute inset-0 flex items-end justify-center pb-8">
+                  <div className="flex gap-4 items-end opacity-30">
+                    {[60, 75, 55, 70].map((h, i) => (
+                      <div
+                        key={i}
+                        className="bg-gray-400"
+                        style={{ width: 36, height: h, borderRadius: '50% 50% 0 0' }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                {/* Warm overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(180,60,0,0.3), transparent)' }}
+                />
+                {/* Play button */}
+                <button
+                  onClick={() => setPlaying(true)}
+                  className="relative z-10 w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-200 hover:scale-105"
+                  style={{ boxShadow: '0 0 0 12px rgba(220,38,38,0.2)' }}
+                  aria-label="Play video"
+                >
+                  <FiPlay size={22} style={{ marginLeft: 3 }} />
+                </button>
               </div>
-            </div>
-            {/* Warm overlay */}
-            <div
-              className="absolute inset-0"
-              style={{ background: 'linear-gradient(to top, rgba(180,60,0,0.3), transparent)' }}
-            />
-            {/* Play button */}
-            <button
-              className="relative z-10 w-16 h-16 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-200 hover:scale-105"
-              style={{ boxShadow: '0 0 0 12px rgba(220,38,38,0.2)' }}
-            >
-              <FiPlay size={22} style={{ marginLeft: 3 }} />
-            </button>
+            )}
           </div>
 
           {/* Bottom-right dot grid */}

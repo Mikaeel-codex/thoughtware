@@ -1,0 +1,58 @@
+.lm-track {
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #05050f 0%, #0d0d1e 100%);
+  padding: 28px 0;
+  /* Fade the edges so logos blend in/out smoothly */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.lm-inner {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  width: max-content;
+  animation: lm-scroll 30s linear infinite;
+}
+
+.lm-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 48px;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+.lm-item:hover {
+  opacity: 1;
+}
+
+.lm-item img {
+  height: 100%;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  /* Keep all logos white/light on the dark bg */
+  filter: brightness(0) invert(1);
+  user-select: none;
+}
+
+@keyframes lm-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

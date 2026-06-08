@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import Stats from '../components/Stats'
 import About from '../components/About'
 import Services from '../components/Services'
+import CurvedLoop from '../components/CurvedLoop'
 import Process from '../components/Process'
 import Projects from '../components/Projects'
 import Testimonials from '../components/Testimonials'
@@ -17,6 +18,17 @@ export default function Home() {
       <Stats />
       <About />
       <Services />
+      <CurvedLoop
+        logos={[
+          { src: '/images/logo1.png', alt: 'Partner 1' },
+          { src: '/images/logo2.png', alt: 'Partner 2' },
+          { src: '/images/logo3.png', alt: 'Partner 3' },
+          { src: '/images/logo4.png', alt: 'Partner 4' },
+        ]}
+        speed={1.5}
+        curveAmount={200}
+        interactive={true}
+      />
       <Process />
       <Projects />
       <Testimonials />

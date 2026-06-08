@@ -57,6 +57,24 @@ export default function Hero() {
         />
       </motion.div>
 
+      {/* ── Shapes — mobile only, decorative behind text ────────────────── */}
+      <motion.img
+        src="/images/Shapes.png"
+        alt=""
+        draggable={false}
+        className="lg:hidden absolute select-none pointer-events-none"
+        style={{
+          width: '100%',
+          maxWidth: 'none',
+          bottom: '0',
+          right: '-25%',
+          zIndex: 1,
+          y: shapesY,
+          opacity: 0.5,
+          filter: 'drop-shadow(0 20px 40px rgba(220,38,38,0.25))',
+        }}
+      />
+
       {/* ── Content — fades + scales down as you scroll away ────────────── */}
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale }}

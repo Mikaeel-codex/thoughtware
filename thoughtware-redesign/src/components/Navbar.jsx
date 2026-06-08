@@ -18,6 +18,9 @@ export default function Navbar() {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
+  // Only highlight nav items when on the home page
+  const effectiveActive = isHome ? active : ''
+
   // Prefix hash links with '/' when not on the home page so the browser
   // navigates home first and then scrolls to the right section.
   const href = (hash) => isHome ? hash : `/${hash}`
@@ -56,8 +59,8 @@ export default function Navbar() {
                 onClick={() => setActive(link.label)}
                 className="text-sm font-medium transition-colors duration-200 hover:text-white"
                 style={{
-                  color: active === link.label ? '#ffffff' : '#9ca3af',
-                  borderBottom: active === link.label ? '2px solid #dc2626' : '2px solid transparent',
+                  color: effectiveActive === link.label ? '#ffffff' : '#9ca3af',
+                  borderBottom: effectiveActive === link.label ? '2px solid #dc2626' : '2px solid transparent',
                   paddingBottom: '4px',
                 }}
               >
